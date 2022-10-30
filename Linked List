@@ -43,12 +43,11 @@ void Deletion(){
         head->val = 0;
     }
     else{
-        cout<<"In D"<<endl;
-        cout<<head->val<<endl;
+        cout<<head->val;
+        cout<<" is deleted"<<endl;
         temp = head;
         head = temp->ptr;
         delete(temp);
-        cout<<head->val<<endl;
     }
 }
 void Reverse(){
