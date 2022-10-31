@@ -1,2 +1,2 @@
 # LinkedList
-Code for Understanding Linked List
+Code for Understanding Linked List in C++
