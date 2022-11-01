@@ -16,16 +16,20 @@ void InsertAtSpecific(int n,int pos);
 void Deletion();
 void Reverse();
 void Display();
+void Searching(int n);
+void SortingInAsc();
 int main() {
     InsertAtBeg(5);
     InsertAtBeg(2);
     InsertAtBeg(3);
     InsertAtEnd(4);
     InsertAtSpecific(9,5);
-    cout<<lenOfNodes;
-    cout<<" is the length"<<endl;
+    InsertAtSpecific(1,2);
+    Searching(1);
+    SortingInAsc();
     Display();
-    
+    cout<<lenOfNodes;
+
     return 0;
 }
 void InsertAtBeg(int n){
@@ -42,7 +46,7 @@ void InsertAtBeg(int n){
         tail = head;
     }
     else{
-        
+
         p = new node;
         p->val = n;
         head->prev = p;
@@ -53,10 +57,10 @@ void InsertAtBeg(int n){
             counter++;
         }
     }
-    
+
     lenOfNodes++;
-    cout<<lenOfNodes;
-    cout<<" is the length"<<endl;
+    //cout<<lenOfNodes;
+    //cout<<" is the length"<<endl;
 }
 void InsertAtEnd(int n){
     struct node *p;
@@ -77,8 +81,8 @@ void InsertAtEnd(int n){
         tail = p;
     }
     lenOfNodes++;
-    cout<<lenOfNodes;
-    cout<<" is the length"<<endl;
+    //cout<<lenOfNodes;
+    //cout<<" is the length"<<endl;
 }
 void InsertAtSpecific(int n,int pos){
     if(pos<1 || pos>lenOfNodes+1){
@@ -86,11 +90,11 @@ void InsertAtSpecific(int n,int pos){
     }
     else if(pos == 1){
         InsertAtBeg(n);
-        lenOfNodes++;
+        //lenOfNodes++;
     }
     else if(pos == lenOfNodes+1){
         InsertAtEnd(n);
-        lenOfNodes++;
+        //lenOfNodes++;
     }
     else{
         int i = 1;
@@ -99,9 +103,11 @@ void InsertAtSpecific(int n,int pos){
         struct node *p;
         p = new node;
         p->val = n;
-        while(i<lenOfNodes+1){
+        while(i<pos){
+            //cout<<i<<endl;
             temp = temp->next;
             i++;
+
         }
         p->next = temp->next;
         p->prev = temp;
@@ -109,9 +115,9 @@ void InsertAtSpecific(int n,int pos){
         temp->next = p;
         lenOfNodes++;
     }
-    cout<<lenOfNodes;
-    cout<<" is the length"<<endl;
-    
+    //cout<<lenOfNodes;
+    //cout<<" is the length"<<endl;
+
 }
 void Deletion(){
     node *temp;
@@ -168,4 +174,42 @@ void Display(){
         }
         cout<<temp->val<<endl;
     }
+}
+void SearchingInAsc(int n){
+    struct node *temp;
+    temp = new node;
+    temp = head;
+    int position = 1;
+    while(temp!=tail){
+        if(temp->val == n){
+            cout<<"Found ";
+            cout<<temp->val;
+            cout<<" at position "<<position<<endl;
+            break;
+        }
+        position++;
+        temp = temp->next;
+    }
+}
+void Sorting(){
+    struct node *p,*q,*newnode;
+    p = new node;
+    q = new node;
+    p = head;
+    q = head->next;
+    newnode = head;
+    for(int i=0;i<lenOfNodes-1;i++){
+        while(q->next!=NULL){
+            cout<<p->val<<"comparing"<<q->val<<endl;
+            if(p->val>q->val){
+                int temp = q->val;
+                q->val = p->val;
+                p->val = temp;
+            }
+            q=q->next;
+    }
+    p = p->next;
+    q = p->next;
+    }
+
 }
