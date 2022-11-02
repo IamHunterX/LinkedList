@@ -2,7 +2,154 @@
 #include <iostream>
 using namespace std;
 
+struct node{// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
 struct node{
+    int val;
+    struct node *ptr;
+};
+int lenOfNodes = 0;
+struct node *head=NULL;
+void InsertAtBeg(int n);
+void InsertAtEnd(int n);
+void InsertAtSP(int n,int pos);
+void Deletion();
+void Reverse();
+void EndPoint();
+int main() {
+    InsertAtBeg(5);
+    InsertAtBeg(2);
+    InsertAtBeg(3);
+    cout<<head->val<<endl;
+    InsertAtEnd(1);
+    cout<<head->val<<endl;
+    cout<<lenOfNodes<<endl;
+    InsertAtSP(8,4);
+    EndPoint();
+
+    return 0;
+}
+void InsertAtBeg(int n){
+    struct node *next;
+    if(head==NULL){
+        next = new node;
+        next->val = n;
+        next->ptr = NULL;
+        head = next;
+    }
+    else{
+        next = new node;
+        next->val = n;
+        next->ptr = head;
+        head = next;
+    }
+    lenOfNodes++;
+}
+void InsertAtEnd(int n){
+    struct node *next;
+    struct node *temp;
+    if(head==NULL){
+
+        next = new node;
+        next->val = n;
+        next->ptr = NULL;
+        head = next;
+    }
+    else{
+        //cout<<"Sehs"<<endl;
+        next = new node;
+        next = head;
+        while(next->ptr!=NULL){
+            //cout<<"S"<<endl;
+            //cout<<next->val<<endl;
+            next = next->ptr;
+        }
+        temp->val = n;
+        cout<<next->val<<endl;
+        next->ptr = temp;
+        temp->ptr = NULL;
+    }
+    lenOfNodes++;
+}
+void InsertAtSP(int n,int pos){
+    if(pos<1 || pos>lenOfNodes+1){
+        cout<<"Invalid Position"<<endl;
+    }
+    else if(pos == 1){
+        InsertAtBeg(n);
+        //lenOfNodes++;
+    }
+    else if(pos == lenOfNodes+1){
+        cout<<"In SP Else if"<<endl;
+        InsertAtEnd(n);
+        //lenOfNodes++;
+    }
+    else{
+        cout<<"In SP Else if"<<endl;
+        int i = 1;
+        struct node *temp;
+        temp = head;
+        struct node *p;
+        p = new node;
+        p->val = n;
+        while(i<pos){
+            //cout<<i<<endl;
+            temp = temp->ptr;
+            i++;
+
+        }
+        p->ptr = temp->ptr;
+        temp->ptr = p;
+        lenOfNodes++;
+    }
+    //cout<<lenOfNodes;
+    //cout<<" is the length"<<endl;
+}
+void Deletion(){
+    node *temp;
+    if(head==NULL){
+        cout<<"List is empty"<<endl;
+    }
+    else if(head->ptr==NULL){
+        head->val = 0;
+    }
+    else{
+        cout<<head->val;
+        cout<<" is deleted"<<endl;
+        temp = head;
+        head = temp->ptr;
+        delete(temp);
+    }
+}
+void Reverse(){
+    node *current=head;
+    node *prev=0;
+    node *next=head;
+    if(head!=NULL){
+        while(next!=NULL){
+        next = next->ptr;
+        current->ptr = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+    }
+    else{
+        cout<<"List is empty"<<endl;
+    }
+}
+void EndPoint(){
+    struct node *temp;
+    temp = new node;
+    temp = head;
+    while(temp->ptr!=NULL){
+        temp = temp->ptr;
+    }
+    cout<<temp->val<<endl;
+}
+
     int val;
     struct node *ptr;
 };
@@ -18,22 +165,7 @@ int main() {
     cout<<head->val<<endl;
     return 0;
 }
-void Insert(int n){
-    struct node *next;
-    if(head==NULL){
-        next = new node;
-        next->val = n;
-        next->ptr = NULL;
-        head = next;
-    }
-    else{
-        next = new node;
-        next->val = n;
-        next->ptr = head;
-        head = next;
-    }
-    
-}
+
 void Deletion(){
     node *temp;
     if(head==NULL){
