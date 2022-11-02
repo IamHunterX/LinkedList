@@ -1,0 +1,203 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+struct node{
+    int val;
+    struct node *ptr;
+};
+int lenOfNodes = 0;
+struct node *head=NULL;
+void InsertAtBeg(int n);
+void InsertAtEnd(int n);
+void InsertAtSP(int n,int pos);
+void DeletionStart();
+void DeletionEnd();
+void DeletionSP(int pos);
+void Reverse();
+void EndPoint();
+void Display();
+int main() {
+    InsertAtBeg(5);
+    InsertAtBeg(6);
+    InsertAtEnd(3);
+    InsertAtEnd(2);
+    InsertAtEnd(4);
+    InsertAtSP(9,2);
+    DeletionStart();
+    DeletionEnd();
+    Display();
+    Display();
+    EndPoint();
+    return 0;
+}
+void InsertAtBeg(int n){
+    struct node *next,*temp;
+    if(head==NULL){
+        next = new node;
+        next->val = n;
+        head = next;
+        next->ptr = head;
+    }
+    else{
+        temp = head;
+        next = new node;
+        while(temp->ptr!=head){
+            temp = temp->ptr;
+            cout<<"BOT"<<endl;
+        }
+        next->val = n;
+        next->ptr = head;
+        head = next;
+        temp->ptr = head;
+    }
+    lenOfNodes++;
+}
+void InsertAtEnd(int n){
+    struct node *next;
+    struct node *temp;
+    next = new node;
+    temp = new node;
+    if(head==NULL){
+        next->val = n;
+        head = next;
+        next->ptr = head;
+    }
+    else{
+        temp = head;
+        while(temp->ptr!=head){
+            temp = temp->ptr;
+        }
+        next->val = n;
+        temp->ptr = next;
+        next->ptr = head;
+    }
+    lenOfNodes++;
+}
+void InsertAtSP(int n,int pos){
+    if(pos<1 || pos>lenOfNodes+1){
+        cout<<"Invalid Position"<<endl;
+    }
+    else if(pos == 1){
+        InsertAtBeg(n);
+    }
+    else if(pos == lenOfNodes+1){
+        InsertAtEnd(n);
+    }
+    else{
+        int i = 1;
+        struct node *temp;
+        temp = head;
+        struct node *p;
+        p = new node;
+        p->val = n;
+        while(i<pos){
+            temp = temp->ptr;
+            i++;
+
+        }
+        p->ptr = temp->ptr;
+        temp->ptr = p;
+        lenOfNodes++;
+    }
+}
+void DeletionStart(){
+    node *temp,*p;
+    if(head==NULL){
+        cout<<"List is empty"<<endl;
+    }
+    else if(head->ptr==head){
+        head->val = 0;
+        lenOfNodes--;
+    }
+    else{
+        cout<<head->val;
+        cout<<" is deleted"<<endl;
+        temp = head;
+        while(temp->ptr!=head){
+            temp = temp->ptr;
+        }
+        p = head;
+        head = head->ptr;
+        temp->ptr = head;
+        delete(p);
+        lenOfNodes--;
+    }
+}
+void DeletionEnd(){
+    struct node *temp,*prev;
+    prev = head;
+    if(head==NULL){
+        cout<<"List is empty"<<endl;
+    }
+    else{
+        temp = head;
+        while(temp->ptr!=head){
+            prev = temp;
+            temp = temp->ptr;
+        }
+        prev->ptr = head;
+        delete(temp);
+        lenOfNodes--;
+    }
+
+}
+void DeletionSP(int pos){
+    struct node *temp,*prev;
+    if(head==NULL){
+        cout<<"List is empty"<<endl;
+    }
+    else if(pos==1){
+        DeletionStart();
+    }
+    else if(pos==lenOfNodes){
+        DeletionEnd();
+    }
+    else{
+        temp = head;
+        int i = 1;
+        while(i<pos){
+            prev = temp;
+            temp = temp->ptr;
+            i++;
+        }
+        prev->ptr = temp->ptr;
+        delete(temp);
+    }
+}
+/*void Reverse(){
+    node *current=head;
+    node *prev=0;
+    node *next=head;
+    if(head!=NULL){
+        while(next!=head){
+        next = next->ptr;
+        current->ptr = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+    }
+    else{
+        cout<<"List is empty"<<endl;
+    }
+}*/
+void EndPoint(){
+    struct node *temp;
+    temp = new node;
+    temp = head;
+    while(temp->ptr!=head){
+        temp = temp->ptr;
+    }
+    cout<<temp->val<<endl;
+}
+void Display(){
+    struct node *temp;
+    temp = head;
+    for(int i=0;i<lenOfNodes;i++){
+        cout<<temp->val<<" ";
+        temp = temp->ptr;
+    }
+    cout<<endl;
+
+}
